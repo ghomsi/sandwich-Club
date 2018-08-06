@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Sandwich Club Project Starter Code
 
 ## Project Overview
@@ -24,3 +25,7 @@ Download the [Sandwich Club app starter code.](https://github.com/udacity/sandwi
 Design the layout for the detail activity so the different elements
 display in a sensible way. Implement the JSON parsing in JsonUtils so it
 produces a Sandwich Object that can be used to populate the UI that you designed.
+=======
+# sandwich-Club
+Udacity-Nano-Degree-Program/Developing Android Apps: Part 1
+>>>>>>> fa05f10b1ad347f0580aede9ac3c6e178d98df51

@@ -3,6 +3,7 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +48,9 @@ public class DetailActivity extends AppCompatActivity {
         populateUI(sandwich);
         Picasso.with(this)
                 .load(sandwich.getImage())
+                .placeholder(R.mipmap.ic_launcher)
+                .error(R.mipmap.ic_launcher_round)
+                .noFade()
                 .into(ingredientsIv);
 
         setTitle(sandwich.getMainName());
@@ -63,10 +67,29 @@ public class DetailActivity extends AppCompatActivity {
         TextView also_known_tv = findViewById(R.id.also_known_tv);
         TextView origin_tv = findViewById(R.id.origin_tv);
 
-        origin_tv.setText("ORIGIN: "+sandwich.getPlaceOfOrigin());
-        also_known_tv.setText(sandwich.getAlsoKnownAs().toString());
-        description_tv.setText(sandwich.getDescription());
-        ingredient_tv.setText(sandwich.getIngredients().toString());
+        if(sandwich.getPlaceOfOrigin().isEmpty()){
+            origin_tv.setText("ORIGIN: Data not available");
+        }else{
+            origin_tv.setText("ORIGIN: "+sandwich.getPlaceOfOrigin());
+        }
+
+        if(sandwich.getAlsoKnownAs().isEmpty()){
+            also_known_tv.setText("Data not available");
+        }else{
+            also_known_tv.setText(TextUtils.join(",",sandwich.getAlsoKnownAs()));
+        }
+
+        if(sandwich.getDescription().isEmpty()){
+            description_tv.setText("Data not available");
+        }else{
+            description_tv.setText(sandwich.getDescription());
+        }
+        if(sandwich.getIngredients().isEmpty()){
+            ingredient_tv.setText("Data not available");
+        }else{
+            ingredient_tv.setText(TextUtils.join(",",sandwich.getIngredients()));
+        }
+
 
     }
 }

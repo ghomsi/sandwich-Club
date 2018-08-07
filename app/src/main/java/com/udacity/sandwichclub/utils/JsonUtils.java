@@ -12,6 +12,8 @@ import java.util.List;
 
 public class JsonUtils {
 
+    private static final String JSON_KEY="name";
+
 
     public static Sandwich parseSandwichJson(String json) {
 
@@ -26,27 +28,27 @@ public class JsonUtils {
         try {
             sandwichJson = new JSONObject(json);
             Log.i("sandwichJson", "parseSandwichJson: "+sandwichJson);
-            JSONObject names = sandwichJson.getJSONObject("name");
+            JSONObject names = sandwichJson.optJSONObject(JSON_KEY);
 
 
-            if(names.getJSONArray("alsoKnownAs")!=null){
-                for(int i=0;i<names.getJSONArray("alsoKnownAs").length();i++){
-                    alsoKnownAs.add(names.getJSONArray("alsoKnownAs").getString(i));
+            if(names.optJSONArray("alsoKnownAs")!=null){
+                for(int i=0;i<names.optJSONArray("alsoKnownAs").length();i++){
+                    alsoKnownAs.add(names.optJSONArray("alsoKnownAs").getString(i));
                 }
 
             }
             if (sandwichJson.getJSONArray("ingredients")!=null){
-                for (int i=0;i<sandwichJson.getJSONArray("ingredients").length();i++){
-                    ingredients.add(sandwichJson.getJSONArray("ingredients").getString(i));
+                for (int i=0;i<sandwichJson.optJSONArray("ingredients").length();i++){
+                    ingredients.add(sandwichJson.optJSONArray("ingredients").getString(i));
                 }
             }
 
             sandwich = new Sandwich(
-                    names.getString("mainName"),
+                    names.optString("mainName"),
                     alsoKnownAs,
-                    sandwichJson.getString("placeOfOrigin"),
-                    sandwichJson.getString("description"),
-                    sandwichJson.getString("image"),
+                    sandwichJson.optString("placeOfOrigin"),
+                    sandwichJson.optString("description"),
+                    sandwichJson.optString("image"),
                     ingredients
             );
         } catch (JSONException e) {
